@@ -2,6 +2,7 @@ import {Injectable, Inject} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {Storage, LocalStorage, Events} from 'ionic-angular';
+import 'rxjs/Rx';
 
 /*
  Generated class for the AuthService provider.
