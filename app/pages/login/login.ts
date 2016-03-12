@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map'
 import {TabsPage} from '../tabs/tabs';
 import {SignupPage} from '../signup/signup';
 import {UserData} from '../../providers/user-data';
-import {AuthService} from '../../providers/auth-service/auth-service';
+import {AuthService} from '../../providers/auth-service';
 
 @Page({
   templateUrl: 'build/pages/login/login.html'

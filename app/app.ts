@@ -8,7 +8,7 @@ import {TabsPage} from './pages/tabs/tabs';
 import {LoginPage} from './pages/login/login';
 import {SignupPage} from './pages/signup/signup';
 import {TutorialPage} from './pages/tutorial/tutorial';
-import {AuthService} from './providers/auth-service/auth-service'
+import {AuthService} from './providers/auth-service'
 
 interface PageObj {
   title: string;
