@@ -2,11 +2,16 @@ import {NavController, Page, ActionSheet} from 'ionic-angular';
 import {ConferenceData} from '../../providers/conference-data';
 import {SpeakerDetailPage} from '../speaker-detail/speaker-detail';
 import {SessionDetailPage} from '../session-detail/session-detail';
-
+import {tokenNotExpired} from 'angular2-jwt';
+import {CanActivate} from 'angular2/router';
 
 @Page({
   templateUrl: 'build/pages/speaker-list/speaker-list.html'
 })
+
+//TODO: CanActivate doesn't seem to work!
+@CanActivate(() => tokenNotExpired('id_token'))
+
 export class SpeakerListPage {
   actionSheet: ActionSheet;
   speakers = [];

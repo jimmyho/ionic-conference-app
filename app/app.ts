@@ -1,10 +1,14 @@
 import {App, IonicApp, Events} from 'ionic-angular';
+import {AuthHttp, AuthConfig} from 'angular2-jwt';
+import {Http} from 'angular2/http'
+import {provide} from 'angular2/core';
 import {ConferenceData} from './providers/conference-data';
 import {UserData} from './providers/user-data';
 import {TabsPage} from './pages/tabs/tabs';
 import {LoginPage} from './pages/login/login';
 import {SignupPage} from './pages/signup/signup';
 import {TutorialPage} from './pages/tutorial/tutorial';
+import {AuthService} from './providers/auth-service/auth-service'
 
 interface PageObj {
   title: string;
@@ -15,7 +19,25 @@ interface PageObj {
 
 @App({
   templateUrl: 'build/app.html',
-  providers: [ConferenceData, UserData],
+  providers: [
+    ConferenceData,
+    UserData,
+    provide(AuthHttp, {
+      useFactory: (http) => {
+        return new AuthHttp(new AuthConfig({
+          // https://github.com/auth0/angular2-jwt
+
+          //headerName: YOUR_HEADER_NAME,
+          headerPrefix: 'Token',
+          //tokenName: YOUR_TOKEN_NAME,
+          //tokenGetter: YOUR_TOKEN_GETTER_FUNCTION,
+          noJwtError: true
+        }), http);
+      },
+      deps: [Http]
+    }),
+    AuthService
+  ],
   config: {
     platforms: {
       android: {
@@ -45,11 +67,11 @@ class ConferenceApp {
   loggedIn = false;
 
   constructor(
-    private app: IonicApp,
-    private events: Events,
-    private userData: UserData,
-    confData: ConferenceData
-  ) {
+    private app:IonicApp,
+    private events:Events,
+    private userData:UserData,
+    confData:ConferenceData,
+    private auth:AuthService) {
     // load the conference data
     confData.load();
 
